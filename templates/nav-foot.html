@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS links-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+
+    {% block style %}{% endblock style %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <!-- start header part -->
+    <header>
+        <div class="container">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="/">News</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">All</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catagorys
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    
+                                    {% for cata in catagory %}
+                                        <li><a class="dropdown-item" href="{% url 'catagory' cata.id %}">{{cata.catagory}}</a></li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Regions
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    
+                                    {% for cata in catagory %}
+                                        <li><a class="dropdown-item" href="{% url 'catagory' cata.id %}">{{cata.catagory}}</a></li>
+                                    {% endfor %}
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <form class="d-flex" method="GET" action="">
+                            <input class="form-control me-2" type="search" placeholder="qaysi catagorya boyicha qidiryapsiz ?" aria-label="Search" name="search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </nav><hr>
+            <div class="tegs" style="padding: 1%;">
+                <h4>Hashtegs:</h4>
+                <div class="texna">
+                    <button class="btn btn-outline-success">HTML5</button>
+                    <button class="btn btn-outline-success">CSS3</button>
+                    <button class="btn btn-outline-success">bootstrap</button>
+                    <button class="btn btn-outline-success">JavaScript</button>
+                    <button class="btn btn-outline-success">Python</button>
+                    <button class="btn btn-outline-success">Django</button>
+                    <button class="btn btn-outline-success">MySql</button>
+                    <button class="btn btn-outline-success">Github</button>
+                </div>
+            </div><hr>
+        </div>
+    </header>
+
+    <!-- start main part -->
+    <main style="min-height: 535px;">
+        <!-- start content -->
+        <div class="container">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+
+    <!-- start footer part -->
+    <footer>
+        <div class="container">
+            <div class="foot" style="padding: 0.5%;">
+                <h5>Asliddin Tuxtasinov</h5>
+            </div>
+        </div>
+    </footer>
+    
+
+    <!-- start js script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    {% block script %}{% endblock script %}
+</body>
+</html>

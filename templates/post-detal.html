@@ -1,0 +1,24 @@
+{% extends "nav-foot.html" %}
+{% load static %}
+{% block style %} <link rel="stylesheet" href="{% static 'style/postDetal.css' %}"> {% endblock style %}
+{% block title %} {{ post.title }} {% endblock title %}
+{% block content %}
+<div class="top">
+    <div class="title">
+        <h1>{{ post.title }}</h1>
+    </div>
+</div>
+<div class="mid">
+    <div class="pic">
+        <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}">
+    </div>
+</div>
+<div class="bot">
+    <div class="category">
+        <h5>Katigoriya: {{ post.catagory }}</h5>
+    </div>
+    <div class="desc">
+        <p>{{ post.describetion }}</p>
+    </div>
+</div>
+{% endblock content %}
