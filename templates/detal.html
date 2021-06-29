@@ -1,13 +1,15 @@
 {% load static %}
 
-{% if posts %}
-    {% for post in posts %}
+{% if object_list %}
+    {% for post in object_list %}
         <div class="card" style="width: 18rem;">
             <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
             <div class="card-body">
             <h5 class="card-title">Titile: {{ post.title }}</h5>
-            <p class="card-text">Catagory: {{ post.catagory }}</p>
-            <a href="{{ post.get_url }}" class="btn btn-primary">more info</a>
+            <p class="card-text">Catagory: {{ post.category }}</p>
+            <p class="card-text">#{{ post.hashtag }}</p>
+            <p class="card-text">{{ post.description|safe|truncatechars:100 }}</p>
+            <a href="{{post.get_absolute_url}}" class="btn btn-primary">more info</a>
             </div>
         </div>
     {% endfor %}

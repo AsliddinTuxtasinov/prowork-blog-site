@@ -1,32 +1,34 @@
 from django.contrib import admin
 from parler.admin import TranslatableAdmin
 
+from .forms import BlogAdminForm, RegionsAdminForm
 from .models import Category, Regions, Blog, Hashtags, PicturesFromTheBlog
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
-    # autocomplete_fields = {
-    #     'name': ['slug']
-    # }
+    prepopulated_fields = {"slug":("name",)}
 
 
 @admin.register(Regions)
 class RegiosnsAdmin(TranslatableAdmin):
     list_display = ('name',)
+    form = RegionsAdminForm
 
 
 @admin.register(Blog)
 class BlogAdmin(TranslatableAdmin):
     list_display = ('title', 'category')
-    # autocomplete_fields = {
-    #     "title": ['slug']
-    # }
+    search_fields = ('title', 'category')
+    # list_filter = ('region', 'category','hashtag')
+    form = BlogAdminForm
+
 
 @admin.register(Hashtags)
 class HashtagsAdmin(admin.ModelAdmin):
     list_display = ('name', )
+    prepopulated_fields = {"slug": ("name",)}
 
 
 @admin.register(PicturesFromTheBlog)

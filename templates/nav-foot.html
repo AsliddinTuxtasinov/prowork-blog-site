@@ -34,8 +34,8 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     
-                                    {% for cata in catagory %}
-                                        <li><a class="dropdown-item" href="{% url 'catagory' cata.id %}">{{cata.catagory}}</a></li>
+                                    {% for cata in category %}
+                                        <li><a class="dropdown-item" href="{{cata.get_absolute_url}}">{{cata.name}}</a></li>
                                     {% endfor %}
 
                                 </ul>
@@ -45,9 +45,21 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     
-                                    {% for cata in catagory %}
-                                        <li><a class="dropdown-item" href="{% url 'catagory' cata.id %}">{{cata.catagory}}</a></li>
+                                    {% for region in regions %}
+                                        <li><a class="dropdown-item" href="{{region.get_absolute_url}}">{{region.name}}</a></li>
                                     {% endfor %}
+
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Lang
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                        <li><a class="dropdown-item" href="#">uz</a></li>
+                                        <li><a class="dropdown-item" href="#">en</a></li>
+                                        <li><a class="dropdown-item" href="#">ru</a></li>
 
                                 </ul>
                             </li>
@@ -62,16 +74,11 @@
             </nav><hr>
             <div class="tegs" style="padding: 1%;">
                 <h4>Hashtegs:</h4>
-                <div class="texna">
-                    <button class="btn btn-outline-success">HTML5</button>
-                    <button class="btn btn-outline-success">CSS3</button>
-                    <button class="btn btn-outline-success">bootstrap</button>
-                    <button class="btn btn-outline-success">JavaScript</button>
-                    <button class="btn btn-outline-success">Python</button>
-                    <button class="btn btn-outline-success">Django</button>
-                    <button class="btn btn-outline-success">MySql</button>
-                    <button class="btn btn-outline-success">Github</button>
-                </div>
+                    <div class="texna">
+                        {% for tag in hashtegs %}
+                            <a href="{{tag.get_absolute_url}}"><button class="btn btn-outline-success">#{{tag.name|title}}</button></a>
+                        {% endfor %}
+                    </div>
             </div><hr>
         </div>
     </header>

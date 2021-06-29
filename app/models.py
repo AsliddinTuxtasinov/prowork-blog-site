@@ -34,6 +34,19 @@ class Category(models.Model):
     def get_absolute_url(self):
         return f'categories/{self.slug}'
 
+class Hashtags(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = 'Hashtags'
+
+    def get_absolute_url(self):
+        return f'hashtag/{self.slug}'
+
+    def __str__(self):
+        return self.name
+
 
 class Blog(TranslatableModel):
     translations = TranslatedFields(
@@ -44,7 +57,7 @@ class Blog(TranslatableModel):
     image = models.ImageField(upload_to='blogimages')
     region = models.ForeignKey(Regions, on_delete=models.CASCADE,)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
-    hashtag = models.ForeignKey('Hashtags', on_delete=models.CASCADE)
+    hashtag = models.ForeignKey(Hashtags, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'Blog'
@@ -53,18 +66,7 @@ class Blog(TranslatableModel):
         return self.safe_translation_getter('title') or ''
 
     def get_absolute_url(self):
-        return f'blog/{self.slug}'
-
-
-class Hashtags(models.Model):
-    name = models.CharField(max_length=255, blank=True, null=True)
-    slug = models.SlugField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        verbose_name_plural = 'Hashtags'
-
-    def __str__(self):
-        return self.name
+        return f'post/{self.slug}'
 
 
 class PicturesFromTheBlog(models.Model):
