@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from parler.models import TranslatableModel, TranslatedFields
 from django.utils.translation import gettext_lazy as _
 
@@ -17,7 +18,7 @@ class Regions(TranslatableModel):
         return self.safe_translation_getter('name') or ''
 
     def get_absolute_url(self):
-        return f'regions/{self.slug}'
+        return reverse("regions", kwargs={"slug": self.slug})  # f'regions/{self.slug}'
 
 
 class Category(models.Model):
@@ -32,7 +33,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'categories/{self.slug}'
+        return reverse("categories", kwargs={"slug": self.slug}) # f'categories/{self.slug}'
 
 class Hashtags(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -42,7 +43,7 @@ class Hashtags(models.Model):
         verbose_name_plural = 'Hashtags'
 
     def get_absolute_url(self):
-        return f'hashtag/{self.slug}'
+        return reverse("hashtag", kwargs={"slug": self.slug}) # f'hashtag/{self.slug}'
 
     def __str__(self):
         return self.name
@@ -66,7 +67,7 @@ class Blog(TranslatableModel):
         return self.safe_translation_getter('title') or ''
 
     def get_absolute_url(self):
-        return f'post/{self.slug}'
+        return reverse("post", kwargs={"slug": self.slug}) # f'post/{self.slug}'
 
 
 class PicturesFromTheBlog(models.Model):
