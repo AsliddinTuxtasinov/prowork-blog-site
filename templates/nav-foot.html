@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Barchasi</a>
+                                <a class="nav-link active" aria-current="page" href="/">{% trans 'Barchasi' %}</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Katagoriyalar
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% trans 'Katagoriyalar' %}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     
@@ -41,7 +42,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Viloyatlar
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% trans 'Viloyatlar' %}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     
@@ -51,29 +52,35 @@
 
                                 </ul>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tillar
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                        <li><a class="dropdown-item" href="#">uz</a></li>
-                                        <li><a class="dropdown-item" href="#">en</a></li>
-                                        <li><a class="dropdown-item" href="#">ru</a></li>
-
-                                </ul>
+<!--                            tillarni tanlash boshlandi-->
+                            <li class="dropdown-item">
+                                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                                    <select name="language" onchange="this.form.submit()">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                                    selected{% endif %}>
+                                                {{ language.code }}
+                                                <!--{{ language.name_local }} ({{ language.code }})-->
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
                             </li>
-
+<!--                            tillarni tanlash tugadi-->
                         </ul>
                         <form class="d-flex" method="GET" action="{% url 'search_post' %}">
-                            <input class="form-control me-2" type="search" placeholder="catagorya yoki hashteg..." aria-label="Search" name="q">
+                            <input class="form-control me-2" type="search" placeholder="{% trans 'catagorya yoki hashteg...' %}" aria-label="Search" name="q">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
             </nav><hr>
             <div class="tegs" style="padding: 1%;">
-                <h4>Hashtegs:</h4>
+                <h4>{% trans 'Heshteglar' %}:</h4>
                     <div class="texna">
                         {% for tag in hashtegs %}
                             <a href="{{tag.get_absolute_url}}"><button class="btn btn-outline-success">#{{tag.name|title}}</button></a>

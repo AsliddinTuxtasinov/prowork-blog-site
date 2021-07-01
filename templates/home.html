@@ -1,10 +1,17 @@
 {% extends "nav-foot.html" %}
+{% load i18n %}
 {% load static %}
-{% block title %}Hush kelibsiz{% endblock title %}
+{% block title %}{%trans 'Hush kelibsiz' %}{% endblock title %}
 {% block content %}
 
 <div class="container">
     <div class="row">
+        <h1>{% trans 'Yangiliklar' %}</h1>
+    </div>
+</div>>
+<div class="container">
+    <div class="row">
         {% include 'detal.html' %}
     </div>
+</div>>
 {% endblock content %}

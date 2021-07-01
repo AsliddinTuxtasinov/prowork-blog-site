@@ -1,4 +1,5 @@
 {% extends "nav-foot.html" %}
+{% load i18n %}
 {% load static %}
 {% block style %} <link rel="stylesheet" href="{% static 'style/postDetal.css' %}"> {% endblock style %}
 {% block title %} {{ post.title }} {% endblock title %}
@@ -15,7 +16,7 @@
 </div>
 <div class="bot">
     <div class="categorya">
-        <h5>Categorya: {{ post.category }}</h5>
+        <h5>{% trans 'Kategoriya' %}: {{ post.category }}</h5>
     </div>
     <div class="hashtags" >
         <h5>#{{ post.hashtag }}</h5>
