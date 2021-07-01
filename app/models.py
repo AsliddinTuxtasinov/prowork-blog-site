@@ -6,9 +6,9 @@ from django.utils.translation import gettext_lazy as _
 
 class Regions(TranslatableModel):
     translation = TranslatedFields(
-        name=models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Name'))
+        name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_('Name'))
     )
-    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+    slug       = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -22,8 +22,8 @@ class Regions(TranslatableModel):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, blank=True, null=True)
-    slug = models.SlugField(max_length=255, unique=True, blank=True, null=True)
+    name       = models.CharField(max_length=255, blank=True, null=True)
+    slug       = models.SlugField(max_length=255, unique=True, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -51,14 +51,14 @@ class Hashtags(models.Model):
 
 class Blog(TranslatableModel):
     translations = TranslatedFields(
-        title=models.CharField(max_length=255, verbose_name=_('Title')),
-        description=models.TextField(verbose_name=_('Description')))
-    slug = models.SlugField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True,)
-    image = models.ImageField(upload_to='blogimages')
-    region = models.ForeignKey(Regions, on_delete=models.CASCADE,)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,)
-    hashtag = models.ForeignKey(Hashtags, on_delete=models.CASCADE)
+        title       = models.CharField(max_length = 255, verbose_name = _('Title')),
+        description = models.TextField(verbose_name = _('Description')))
+    slug       = models.SlugField(max_length = 255, unique = True)
+    created_at = models.DateTimeField(auto_now_add = True,)
+    image      = models.ImageField(upload_to = 'blogimages')
+    region     = models.ForeignKey(Regions, on_delete  = models.CASCADE,)
+    category   = models.ForeignKey(Category, on_delete = models.CASCADE,)
+    hashtag    = models.ForeignKey(Hashtags, on_delete = models.CASCADE)
 
     class Meta:
         verbose_name_plural = 'Blog'
